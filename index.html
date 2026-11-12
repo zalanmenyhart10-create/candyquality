@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CANDY QUALITY — Verified Streetwear & Sneakers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface-hover: #171717;
+      --border: #222222;
+      --border-strong: #383838;
+      --text: #f5f5f5;
+      --muted: #8a8a8a;
+      --vinted: #007782;
+      --vinted-hover: #008f9c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    /* TOP TICKER */
+    .ticker {
+      background: #111;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      padding: 8px 16px;
+      font-weight: 500;
+    }
+
+    .ticker span {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(8, 8, 8, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 0.95;
+    }
+
+    .brand-crown {
+      width: 24px;
+      height: 16px;
+      margin-bottom: 2px;
+    }
+
+    .brand-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links button {
+      padding: 4px 0;
+      position: relative;
+      transition: color 0.15s;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active {
+      color: var(--text);
+    }
+
+    .nav-links button.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      background: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+
+    .lang-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .insta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .insta-pill:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* MOBILE MENU BAR */
+    .mobile-nav {
+      display: none;
+      overflow-x: auto;
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      gap: 16px;
+      background: #0b0b0b;
+    }
+
+    .mobile-nav button {
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-nav button.active {
+      color: var(--text);
+    }
+
+    /* PAGES CONTAINER */
+    .page-view {
+      display: none;
+      flex-grow: 1;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 52px 24px 40px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 32px;
+      align-items: end;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 3px;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 10px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 3px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+    }
+
+    /* SECTION HEADERS & CONTROLS */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .controls-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .search-input, .size-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 13px;
+      border-radius: 3px;
+      outline: none;
+    }
+
+    .search-input:focus, .size-select:focus {
+      border-color: var(--text);
+    }
+
+    /* PRODUCT GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #141414;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .badge-cond {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(8, 8, 8, 0.88);
+      border: 1px solid var(--border-strong);
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .badge-sold {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 8, 8, 0.74);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .card-brand {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      cursor: pointer;
+    }
+
+    .card-title:hover {
+      text-decoration: underline;
+    }
+
+    .card-specs {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-size {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card-size strong {
+      color: var(--text);
+    }
+
+    .card-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn-vinted {
+      background: var(--vinted);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 9px 10px;
+      text-align: center;
+      border-radius: 3px;
+      transition: background 0.15s;
+    }
+
+    .btn-vinted:hover {
+      background: var(--vinted-hover);
+    }
+
+    .btn-insta {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 9px 10px;
+      text-align: center;
+      border-radius: 3px;
+      transition: all 0.15s;
+    }
+
+    .btn-insta:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* SUBPAGES: HOW TO ORDER & CONTACT */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+    }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .step-card h3 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .faq-list {
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .faq-item p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.84);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 60;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      max-width: 780px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      font-size: 22px;
+      color: var(--muted);
+      z-index: 2;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    .modal-img {
+      background: #141414;
+      aspect-ratio: 1 / 1;
+    }
+
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .nav-links { display: none; }
+      .mobile-nav { display: flex; }
+      .steps-grid, .contact-grid, .modal-box { grid-template-columns: 1fr; }
+      .card-actions { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticker" id="tickerText"></div>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('home')">
+        <!-- Saját logóhoz: <img src="logo.png" alt="Candy Quality" style="height:44px;"> -->
+        <div class="brand-mark">
+          <svg class="brand-crown" viewBox="0 0 36 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19L2 6L11 12L18 3L25 12L34 6L32 19H4Z"/>
+            <line x1="6" y1="22" x2="30" y2="22"/>
+          </svg>
+          <span class="brand-name">Candy Quality</span>
+        </div>
+      </div>
+
+      <nav class="nav-links" id="desktopNav">
+        <button data-page="home" class="active" data-i18n="nav_home"></button>
+        <button data-page="sneakers" data-i18n="nav_sneakers"></button>
+        <button data-page="apparel" data-i18n="nav_apparel"></button>
+        <button data-page="how-to-order" data-i18n="nav_howto"></button>
+        <button data-page="contact" data-i18n="nav_contact"></button>
+      </nav>
+
+      <div class="nav-right">
+        <div class="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn active" id="btnRo" onclick="setLanguage('ro')">RO</button>
+          <button class="lang-btn" id="btnHu" onclick="setLanguage('hu')">HU</button>
+        </div>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="insta-pill">
+          @candyquality &nearr;
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <button data-page="home" class="active" data-i18n="nav_home"></button>
+      <button data-page="sneakers" data-i18n="nav_sneakers"></button>
+      <button data-page="apparel" data-i18n="nav_apparel"></button>
+      <button data-page="how-to-order" data-i18n="nav_howto"></button>
+      <button data-page="contact" data-i18n="nav_contact"></button>
+    </div>
+  </header>
+
+  <!-- PAGE 1: HOME (ALL CATALOG) -->
+  <div id="page-home" class="page-view active">
+    <section class="hero">
+      <div>
+        <span class="hero-tag" data-i18n="hero_tag"></span>
+        <h1 data-i18n="hero_title"></h1>
+      </div>
+      <div class="hero-meta">
+        <p data-i18n="hero_desc"></p>
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="navigateTo('sneakers')" data-i18n="btn_view_sneakers"></button>
+          <button class="btn-secondary" onclick="navigateTo('apparel')" data-i18n="btn_view_apparel"></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" data-i18n="all_stock_title"></h2>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchHome" />
+        </div>
+      </div>
+      <div class="grid" id="gridHome"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: SNEAKERS -->
+  <div id="page-sneakers" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_sneakers_sub"></span>
+          <h1 class="section-title" style="font-size:32px;" data-i18n="nav_sneakers"></h1>
+        </div>
+        <div class="controls-right">
+          <select class="size-select" id="sizeFilterSneakers">
+            <option value="all" data-i18n="all_sizes"></option>
+            <option value="40">EU 40</option>
+            <option value="41">EU 41</option>
+            <option value="42">EU 42</option>
+            <option value="43">EU 43</option>
+            <option value="44">EU 44</option>
+          </select>
+          <input type="text" class="search-input" id="searchSneakers" />
+        </div>
+      </div>
+      <div class="grid" id="gridSneakers"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: APPAREL -->
+  <div id="page-apparel" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_apparel_sub"></span>
+          <h1 class="section-title" style="font-size:32px;" data-i18n="nav_apparel"></h1>
+        </div>
+        <div class="controls-right">
+          <select class="size-select" id="sizeFilterApparel">
+            <option value="all" data-i18n="all_sizes"></option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+          <input type="text" class="search-input" id="searchApparel" />
+        </div>
+      </div>
+      <div class="grid" id="gridApparel"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: HOW TO ORDER -->
+  <div id="page-how-to-order" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;">INFO &amp; SHIPPING</span>
+          <h1 class="section-title" style="font-size:32px;" data-i18n="nav_howto"></h1>
+        </div>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">01 / SELECT</span>
+          <h3 data-i18n="step1_title"></h3>
+          <p data-i18n="step1_desc"></p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">02 / ORDER</span>
+          <h3 data-i18n="step2_title"></h3>
+          <p data-i18n="step2_desc"></p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">03 / DELIVERY</span>
+          <h3 data-i18n="step3_title"></h3>
+          <p data-i18n="step3_desc"></p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4 data-i18n="faq1_q"></h4>
+          <p data-i18n="faq1_a"></p>
+        </div>
+        <div class="faq-item">
+          <h4 data-i18n="faq2_q"></h4>
+          <p data-i18n="faq2_a"></p>
+        </div>
+        <div class="faq-item">
+          <h4 data-i18n="faq3_q"></h4>
+          <p data-i18n="faq3_a"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: CONTACT -->
+  <div id="page-contact" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;">DIRECT SUPPORT</span>
+          <h1 class="section-title" style="font-size:32px;" data-i18n="nav_contact"></h1>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-box">
+          <div>
+            <span class="hero-tag">INSTAGRAM DM</span>
+            <h3 style="font-size:20px; margin-bottom:10px;" data-i18n="contact_ig_title"></h3>
+            <p style="font-size:14px; color:var(--muted);" data-i18n="contact_ig_desc"></p>
+          </div>
+          <a href="https://ig.me/m/candyquality" target="_blank" rel="noopener" class="btn-primary" style="text-align:center;" data-i18n="contact_ig_btn"></a>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <span class="hero-tag">VINTED OFFICIAL</span>
+            <h3 style="font-size:20px; margin-bottom:10px;" data-i18n="contact_vinted_title"></h3>
+            <p style="font-size:14px; color:var(--muted);" data-i18n="contact_vinted_desc"></p>
+          </div>
+          <a href="https://www.vinted.ro/" target="_blank" rel="noopener" class="btn-vinted" style="padding:12px;" data-i18n="contact_vinted_btn"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>&copy; 2026 CANDY QUALITY. <span data-i18n="footer_rights"></span></div>
+      <div style="display:flex; gap:20px;">
+        <a href="https://www.vinted.ro/" target="_blank" rel="noopener">Vinted</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div class="modal-backdrop" id="productModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <div class="modal-img">
+        <img id="modalImg" src="" alt="" />
+      </div>
+      <div class="modal-content">
+        <div>
+          <div class="card-brand" id="modalBrand"></div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-size:22px; margin:4px 0 12px;" id="modalTitle"></h2>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:16px;" id="modalDesc"></p>
+          <div style="display:flex; gap:24px; padding:12px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); font-size:13px;">
+            <div><span style="color:var(--muted);" data-i18n="label_size"></span>: <strong id="modalSize"></strong></div>
+            <div><span style="color:var(--muted);" data-i18n="label_cond"></span>: <strong id="modalCond"></strong></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; margin-bottom:12px;" id="modalPrice"></div>
+          <div class="card-actions" id="modalActions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. TERMÉKEK LISTÁJA (ITT TUDOD FRISSÍTENI A KÉSZLETEDET)
+    // =========================================================================
+    const INSTAGRAM_USERNAME = "candyquality";
+
+    const PRODUCTS = [
+      {
+        id: 1,
+        brand: "Jordan Brand",
+        name: "Air Jordan 4 Retro 'Military Black'",
+        category: "sneakers",
+        size: "EU 43",
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "1 450 RON",
+        sold: false,
+        image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80",
+        desc_ro: "Cutie originală, toate accesoriile incluse. Livrare rapidă prin Vinted sau predare personală.",
+        desc_hu: "Eredeti dobozában, minden kiegészítővel. Azonnal postázható Vinteden vagy személyesen.",
+        vintedUrl: "https://www.vinted.ro/"
+      },
+      {
+        id: 2,
+        brand: "Nike",
+        name: "Nike Dunk Low 'Panda' Black/White",
+        category: "sneakers",
+        size: "EU 41",
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "580 RON",
+        sold: false,
+        image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+        desc_ro: "Model clasic alb-negru, nou în cutie, cu factură doveditoare.",
+        desc_hu: "Klasszikus fekete-fehér színállás, bontatlan állapotban, számlával igazolva.",
+        vintedUrl: "https://www.vinted.ro/"
+      },
+      {
+        id: 3,
+        brand: "Stüssy",
+        name: "Stüssy Basic Logo Heavyweight Hoodie",
+        category: "apparel",
+        size: "L",
+        condition_ro: "Nou cu etichetă",
+        condition_hu: "Új, címkés",
+        price: "690 RON",
+        sold: false,
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+        desc_ro: "Bumbac gros, croială boxy, logo imprimat față-spate.",
+        desc_hu: "Vastag pamut anyag, boxy szabás, elöl és hátul nyomott logóval.",
+        vintedUrl: "https://www.vinted.ro/"
+      },
+      {
+        id: 4,
+        brand: "Adidas",
+        name: "Adidas Campus 00s 'Core Black'",
+        category: "sneakers",
+        size: "EU 42",
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "550 RON",
+        sold: false,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+        desc_ro: "Include șireturi de schimb, cutie originală.",
+        desc_hu: "Extra pót-fűzővel, eredeti dobozában.",
+        vintedUrl: "https://www.vinted.ro/"
+      },
+      {
+        id: 5,
+        brand: "Trapstar",
+        name: "Trapstar Irongate T-Shirt Black",
+        category: "apparel",
+        size: "M",
+        condition_ro: "9.5/10 (Impecabil)",
+        condition_hu: "9.5/10 (Kifogástalan)",
+        price: "320 RON",
+        sold: true,
+        image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80",
+        desc_ro: "Purtat o singură dată, stare impecabilă.",
+        desc_hu: "Egyszer viselt, hibátlan állapotú darab.",
+        vintedUrl: "https://www.vinted.ro/"
+      }
+    ];
+
+    // =========================================================================
+    // 2. ROMÁN & MAGYAR SZÓTÁR
+    // =========================================================================
+    const TRANSLATIONS = {
+      ro: {
+        ticker: "100% Produse Originale &bull; <span>Livrare rapidă prin Vinted</span> &bull; Comandă prin Instagram DM",
+        nav_home: "Acasă",
+        nav_sneakers: "Adidași",
+        nav_apparel: "Haine",
+        nav_howto: "Cum comand",
+        nav_contact: "Contact",
+        hero_tag: "Curated Streetwear & Sneakers Catalog",
+        hero_title: "Piese selectate,<br>disponibile în stoc.",
+        hero_desc: "Toți adidașii și hainele sunt 100% originale și verificate. Alege mărimea dorită și comandă în siguranță prin Vinted sau scrie-ne pe Instagram.",
+        btn_view_sneakers: "Vezi Adidașii",
+        btn_view_apparel: "Vezi Hainele",
+        all_stock_title: "Stoc Disponibil",
+        cat_sneakers_sub: "FOOTWEAR COLLECTION",
+        cat_apparel_sub: "CLOTHING & HOODIES",
+        search_placeholder: "Caută model, brand, mărime...",
+        all_sizes: "Toate mărimile",
+        label_size: "Mărime",
+        label_cond: "Stare",
+        badge_sold: "VÂNDUT",
+        btn_sold: "Vândut",
+        btn_buy_vinted: "Cumpără pe Vinted",
+        btn_dm_insta: "Scrie pe Insta",
+        no_results: "Nu există produse care să corespundă căutării.",
+        step1_title: "Alege produsul din stoc",
+        step1_desc: "Toate piesele afișate sunt fizic în stocul nostru, cu poze reale și mărimi exacte.",
+        step2_title: "Vinted sau Instagram DM",
+        step2_desc: "Pentru livrare în țară folosește protecția cumpărătorului Vinted, sau scrie-ne pe Insta pentru detalii.",
+        step3_title: "Livrare rapidă și sigură",
+        step3_desc: "Expediem coletele în maxim 24 de ore prin curier sau Easybox, ambalate double-box.",
+        faq1_q: "Produsele sunt 100% originale?",
+        faq1_a: "Da. Fiecare pereche de adidași și fiecare articol vestimentar trece printr-o verificare riguroasă înainte de listare.",
+        faq2_q: "Cum pot comanda dacă nu sunt din oraș?",
+        faq2_a: "Cel mai simplu este să apeși pe butonul Vinted de sub produs și să plasezi comanda direct acolo cu livrare prin curier.",
+        faq3_q: "Pot cere mai multe poze?",
+        faq3_a: "Desigur! Trimite-ne un mesaj pe Instagram (@candyquality) cu numele modelului și îți trimitem poze sau video.",
+        contact_ig_title: "Răspundem rapid pe Instagram",
+        contact_ig_desc: "Pentru întrebări legate de mărimi, poze suplimentare sau predare personală, dă-ne un DM.",
+        contact_ig_btn: "Deschide Instagram DM",
+        contact_vinted_title: "Comandă cu protecție pe Vinted",
+        contact_vinted_desc: "Vezi toate recenziile noastre și comandă în siguranță cu livrare oriunde în țară.",
+        contact_vinted_btn: "Mergi la profilul Vinted",
+        footer_rights: "Toate drepturile rezervate."
+      },
+      hu: {
+        ticker: "100% Eredeti darabok &bull; <span>Azonnali postázás Vinteden</span> &bull; Rendelés Insta DM-ben",
+        nav_home: "Kezdőlap",
+        nav_sneakers: "Cipők",
+        nav_apparel: "Ruhák",
+        nav_howto: "Rendelés menete",
+        nav_contact: "Kapcsolat",
+        hero_tag: "Curated Streetwear & Sneakers Catalog",
+        hero_title: "Válogatott darabok,<br>azonnal készletről.",
+        hero_desc: "Minden feltöltött cipő és ruha 100% eredeti és ellenőrzött. Válaszd ki a méreted, és rendeld meg Vinteden vagy írj ránk Instagramon.",
+        btn_view_sneakers: "Cipők megtekintése",
+        btn_view_apparel: "Ruhák megtekintése",
+        all_stock_title: "Teljes Készlet",
+        cat_sneakers_sub: "FOOTWEAR COLLECTION",
+        cat_apparel_sub: "CLOTHING & HOODIES",
+        search_placeholder: "Keresés modellre, márkára, méretre...",
+        all_sizes: "Minden méret",
+        label_size: "Méret",
+        label_cond: "Állapot",
+        badge_sold: "ELKELT",
+        btn_sold: "Már elkelt",
+        btn_buy_vinted: "Megveszem Vinteden",
+        btn_dm_insta: "Írok Instán",
+        no_results: "Nincs a keresésnek megfelelő darab a készletben.",
+        step1_title: "Válaszd ki a terméket",
+        step1_desc: "Minden feltöltött darab ténylegesen készleten van, valós mérettel és állapottal.",
+        step2_title: "Vinted vagy Instagram DM",
+        step2_desc: "Távolabbi rendeléshez használd a Vinted vevővédelmet, vagy írj üzenetet Instán extra képekért.",
+        step3_title: "Gyors, biztonságos szállítás",
+        step3_desc: "A csomagokat 24 órán belül feladjuk futárral vagy automatába, dupla dobozban.",
+        faq1_q: "Minden termék 100% eredeti?",
+        faq1_a: "Igen. Minden egyes cipő és ruha szigorú eredetiség-ellenőrzésen esik át feltöltés előtt.",
+        faq2_q: "Hogyan tudok rendelni, ha messzebbről vagyok?",
+        faq2_a: "Kattints a termék alatti Vinted gombra, és rendeld meg közvetlenül ott biztonságos házhozszállítással.",
+        faq3_q: "Kérhetek több képet egy termékről?",
+        faq3_a: "Természetesen! Írj nekünk Instagramon (@candyquality), és küldünk plusz fotókat vagy videót.",
+        contact_ig_title: "Gyors válasz Instagramon",
+        contact_ig_desc: "Méretkérdésekkel, extra fotókkal vagy személyes átvétellel kapcsolatban írj DM-et.",
+        contact_ig_btn: "Instagram DM megnyitása",
+        contact_vinted_title: "Rendelés Vinted vevővédelemmel",
+        contact_vinted_desc: "Nézd meg az értékeléseinket és rendelj biztonságosan az ország bármely pontjára.",
+        contact_vinted_btn: "Vinted profil megnyitása",
+        footer_rights: "Minden jog fenntartva."
+      }
+    };
+
+    // =========================================================================
+    // 3. NYELVVÁLASZTÓ ÉS TÖBBOLDALAS NAVIGÁCIÓ LOGIKA
+    // =========================================================================
+    // Mindig románul ('ro') indul alapértelmezetten!
+    let currentLang = "ro";
+    let currentPage = "home";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("btnRo").classList.toggle("active", lang === "ro");
+      document.getElementById("btnHu").classList.toggle("active", lang === "hu");
+
+      const t = TRANSLATIONS[lang];
+      document.getElementById("tickerText").innerHTML = t.ticker;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.innerHTML = t[key];
+      });
+
+      document.querySelectorAll(".search-input").forEach(inp => {
+        inp.placeholder = t.search_placeholder;
+      });
+
+      renderAllGrids();
+    }
+
+    function navigateTo(page) {
+      currentPage = page;
+      window.location.hash = page;
+
+      document.querySelectorAll(".page-view").forEach(sec => {
+        sec.classList.toggle("active", sec.id === `page-${page}`);
+      });
+
+      document.querySelectorAll("[data-page]").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-page") === page);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-page]").forEach(btn => {
+      btn.addEventListener("click", () => navigateTo(btn.getAttribute("data-page")));
+    });
+
+    window.addEventListener("hashchange", () => {
+      const hashPage = window.location.hash.replace("#", "");
+      if (hashPage && document.getElementById(`page-${hashPage}`) && hashPage !== currentPage) {
+        navigateTo(hashPage);
+      }
+    });
+
+    // =========================================================================
+    // 4. TERMÉKKÁRTYÁK RENDERELÉSE
+    // =========================================================================
+    function createCardHTML(item) {
+      const t = TRANSLATIONS[currentLang];
+      const cond = currentLang === "ro" ? item.condition_ro : item.condition_hu;
+      const instaUrl = `https://ig.me/m/${INSTAGRAM_USERNAME}`;
+
+      return `
+        <article class="card">
+          <div class="card-img-wrap" onclick="openModal(${item.id})">
+            <img src="${item.image}" alt="${item.name}" loading="lazy">
+            <span class="badge-cond">${cond}</span>
+            ${item.sold ? `<div class="badge-sold">${t.badge_sold}</div>` : ''}
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-brand">${item.brand}</div>
+              <h3 class="card-title" onclick="openModal(${item.id})">${item.name}</h3>
+            </div>
+            <div>
+              <div class="card-specs">
+                <span class="card-size">${t.label_size}: <strong>${item.size}</strong></span>
+                <span class="card-price">${item.price}</span>
+              </div>
+              <div class="card-actions">
+                ${item.sold
+                  ? `<button class="btn-insta" style="grid-column:1/-1; opacity:0.5; cursor:default;">${t.btn_sold}</button>`
+                  : `
+                    <a href="${item.vintedUrl}" target="_blank" rel="noopener" class="btn-vinted">Vinted</a>
+                    <a href="${instaUrl}" target="_blank" rel="noopener" class="btn-insta">Insta DM</a>
+                  `
+                }
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderGrid(targetId, items) {
+      const container = document.getElementById(targetId);
+      if (items.length === 0) {
+        container.innerHTML = `<p style="color:var(--muted); grid-column:1/-1; padding:32px 0;">${TRANSLATIONS[currentLang].no_results}</p>`;
+        return;
+      }
+      container.innerHTML = items.map(createCardHTML).join("");
+    }
+
+    function renderAllGrids() {
+      // Home Grid
+      const qHome = document.getElementById("searchHome").value.toLowerCase().trim();
+      const homeItems = PRODUCTS.filter(p =>
+        p.name.toLowerCase().includes(qHome) ||
+        p.brand.toLowerCase().includes(qHome) ||
+        p.size.toLowerCase().includes(qHome)
+      );
+      renderGrid("gridHome", homeItems);
+
+      // Sneakers Grid
+      const qSneak = document.getElementById("searchSneakers").value.toLowerCase().trim();
+      const sizeSneak = document.getElementById("sizeFilterSneakers").value;
+      const sneakItems = PRODUCTS.filter(p =>
+        p.category === "sneakers" &&
+        (sizeSneak === "all" || p.size.includes(sizeSneak)) &&
+        (p.name.toLowerCase().includes(qSneak) || p.brand.toLowerCase().includes(qSneak))
+      );
+      renderGrid("gridSneakers", sneakItems);
+
+      // Apparel Grid
+      const qApp = document.getElementById("searchApparel").value.toLowerCase().trim();
+      const sizeApp = document.getElementById("sizeFilterApparel").value;
+      const appItems = PRODUCTS.filter(p =>
+        p.category === "apparel" &&
+        (sizeApp === "all" || p.size === sizeApp) &&
+        (p.name.toLowerCase().includes(qApp) || p.brand.toLowerCase().includes(qApp))
+      );
+      renderGrid("gridApparel", appItems);
+    }
+
+    document.getElementById("searchHome").addEventListener("input", renderAllGrids);
+    document.getElementById("searchSneakers").addEventListener("input", renderAllGrids);
+    document.getElementById("sizeFilterSneakers").addEventListener("change", renderAllGrids);
+    document.getElementById("searchApparel").addEventListener("input", renderAllGrids);
+    document.getElementById("sizeFilterApparel").addEventListener("change", renderAllGrids);
+
+    // =========================================================================
+    // 5. TERMÉK RÉSZLETEK MODAL
+    // =========================================================================
+    const modal = document.getElementById("productModal");
+    function openModal(id) {
+      const item = PRODUCTS.find(p => p.id === id);
+      if (!item) return;
+      const t = TRANSLATIONS[currentLang];
+
+      document.getElementById("modalImg").src = item.image;
+      document.getElementById("modalBrand").textContent = item.brand;
+      document.getElementById("modalTitle").textContent = item.name;
+      document.getElementById("modalDesc").textContent = currentLang === "ro" ? item.desc_ro : item.desc_hu;
+      document.getElementById("modalSize").textContent = item.size;
+      document.getElementById("modalCond").textContent = currentLang === "ro" ? item.condition_ro : item.condition_hu;
+      document.getElementById("modalPrice").textContent = item.price;
+
+      const instaUrl = `https://ig.me/m/${INSTAGRAM_USERNAME}`;
+      const actions = document.getElementById("modalActions");
+      actions.innerHTML = item.sold
+        ? `<button class="btn-insta" style="grid-column:1/-1; opacity:0.5;">${t.btn_sold}</button>`
+        : `
+          <a href="${item.vintedUrl}" target="_blank" rel="noopener" class="btn-vinted">${t.btn_buy_vinted}</a>
+          <a href="${instaUrl}" target="_blank" rel="noopener" class="btn-insta">${t.btn_dm_insta}</a>
+        `;
+      modal.classList.add("open");
+    }
+
+    document.getElementById("closeModal").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", e => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+
+    // Indítás: mindig román nyelven!
+    setLanguage("ro");
+  </script>
+</body>
+</html>
