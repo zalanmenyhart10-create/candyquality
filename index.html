@@ -858,84 +858,93 @@
   </div>
 
   <script>
-    // =========================================================================
-    // TERMÉKEK LISTÁJA
-    // =========================================================================
-    const INSTAGRAM_HANDLE = "candyquality.ro";
+const INSTAGRAM_HANDLE = "candyquality.ro";
 
-    const PRODUCTS = [
-      {
-        id: 1,
-        brand: "Jordan Brand",
-        name: "Air Jordan 4 Retro 'Military Black'",
-        category: "sneakers",
-        size: "EU 43",
-        condition_ro: "Deadstock (Nou)",
-        condition_hu: "Deadstock (Új)",
-        price: "1 450 RON",
-        sold: false,
-        image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80",
-        desc_ro: "Cutie originală. Predare personală în Reghin, Mureș sau comandă direct prin Instagram DM.",
-        desc_hu: "Eredeti dobozában. Személyes átvétel Szászrégenben (Reghin, Mureș) vagy rendelés Insta DM-ben.",
-      },
-      {
-        id: 2,
-        brand: "Nike",
-        name: "Nike Dunk Low 'Panda' Black/White",
-        category: "sneakers",
-        size: "EU 41",
-        condition_ro: "Deadstock (Nou)",
-        condition_hu: "Deadstock (Új)",
-        price: "580 RON",
-        sold: false,
-        image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
-        desc_ro: "Model clasic alb-negru, nou în cutie. Disponibil pentru predare în Reghin.",
-        desc_hu: "Klasszikus fekete-fehér, új dobozában. Elérhető régeni személyes átvétellel is.",
-      },
-      {
-        id: 3,
-        brand: "Stüssy",
-        name: "Stüssy Basic Logo Heavyweight Hoodie",
-        category: "apparel",
-        size: "L",
-        condition_ro: "Nou cu etichetă",
-        condition_hu: "Új, címkés",
-        price: "690 RON",
-        sold: false,
-        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
-        desc_ro: "Bumbac gros, croială boxy. Scrie-ne pe Instagram pentru detalii.",
-        desc_hu: "Vastag pamut anyag, boxy szabás. Írj ránk Instagramon a részletekért.",
-      },
-      {
-        id: 4,
-        brand: "Adidas",
-        name: "Adidas Campus 00s 'Core Black'",
-        category: "sneakers",
-        size: "EU 42",
-        condition_ro: "Deadstock (Nou)",
-        condition_hu: "Deadstock (Új)",
-        price: "550 RON",
-        sold: false,
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-        desc_ro: "Cutie originală și șireturi extra. Predare în Mureș / Reghin.",
-        desc_hu: "Eredeti doboz és extra fűzők. Átvétel Szászrégenben vagy Insta DM.",
-      },
-      {
-        id: 5,
-        brand: "Trapstar",
-        name: "Trapstar Irongate T-Shirt Black",
-        category: "apparel",
-        size: "M",
-        condition_ro: "9.5/10 (Impecabil)",
-        condition_hu: "9.5/10 (Kifogástalan)",
-        price: "320 RON",
-        sold: true,
-        image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80",
-        desc_ro: "Produs vândut.",
-        desc_hu: "Már elkelt.",
-      }
-    ];
-
+const PRODUCTS = [
+  {
+    id: 1,
+    brand: "UGG",
+    name: "Lowmel SNEAKER | LOW UGG",
+    category: "sneakers",
+    sizes: ["EU 37", "EU 38", "EU 39", "EU 40"], // Több méret
+    condition_ro: "Deadstock (Nou)",
+    condition_hu: "Deadstock (Új)",
+    price: "1 450 RON",
+    sold: false,
+    images: [
+      "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc_ro: "Cutie originală. Predare personală în Reghin, Mureș sau comandă direct prin Instagram DM.",
+    desc_hu: "Eredeti dobozában. Személyes átvétel Szászrégenben (Reghin, Mureș) vagy rendelés Insta DM-ben.",
+  },
+  {
+    id: 2,
+    brand: "Nike",
+    name: "Nike Dunk Low 'Panda' Black/White",
+    category: "sneakers",
+    sizes: ["EU 40", "EU 41", "EU 42", "EU 43"],
+    condition_ro: "Deadstock (Nou)",
+    condition_hu: "Deadstock (Új)",
+    price: "580 RON",
+    sold: false,
+    images: [
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc_ro: "Model clasic alb-negru, nou în cutie. Disponibil pentru predare în Reghin.",
+    desc_hu: "Klasszikus fekete-fehér, új dobozában. Elérhető régeni személyes átvétellel is.",
+  },
+  {
+    id: 3,
+    brand: "Stüssy",
+    name: "Stüssy Basic Logo Heavyweight Hoodie",
+    category: "apparel",
+    sizes: ["S", "M", "L", "XL"],
+    condition_ro: "Nou cu etichetă",
+    condition_hu: "Új, címkés",
+    price: "690 RON",
+    sold: false,
+    images: [
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc_ro: "Bumbac gros, croială boxy. Scrie-ne pe Instagram pentru detalii.",
+    desc_hu: "Vastag pamut anyag, boxy szabás. Írj ránk Instagramon a részletekért.",
+  },
+  {
+    id: 4,
+    brand: "Adidas",
+    name: "Adidas Campus 00s 'Core Black'",
+    category: "sneakers",
+    sizes: ["EU 38", "EU 41", "EU 42"],
+    condition_ro: "Deadstock (Nou)",
+    condition_hu: "Deadstock (Új)",
+    price: "550 RON",
+    sold: false,
+    images: [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc_ro: "Cutie originală și șireturi extra. Predare în Mureș / Reghin.",
+    desc_hu: "Eredeti doboz és extra fűzők. Átvétel Szászrégenben vagy Insta DM.",
+  },
+  {
+    id: 5,
+    brand: "Trapstar",
+    name: "Trapstar Irongate T-Shirt Black",
+    category: "apparel",
+    sizes: ["M"],
+    condition_ro: "9.5/10 (Impecabil)",
+    condition_hu: "9.5/10 (Kifogástalan)",
+    price: "320 RON",
+    sold: true,
+    images: [
+      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc_ro: "Produs vândut.",
+    desc_hu: "Már elkelt.",
+  }
+];
     // =========================================================================
     // SZÓTÁR (RO / HU)
     // =========================================================================
