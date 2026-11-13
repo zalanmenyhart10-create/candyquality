@@ -102,7 +102,7 @@
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       font-size: 13px;
       font-weight: 500;
       color: var(--muted);
@@ -185,8 +185,9 @@
       overflow-x: auto;
       border-top: 1px solid var(--border);
       padding: 10px 16px;
-      gap: 18px;
+      gap: 16px;
       background: #090909;
+      -webkit-overflow-scrolling: touch;
     }
 
     .mobile-nav button {
@@ -751,44 +752,85 @@
       display: none;
     }
 
-    /* FULLSCREEN LIGHTBOX MODAL */
+    /* FULLSCREEN ZOOMABLE LIGHTBOX */
     .lightbox-modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.95);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      padding: 24px;
+      touch-action: none;
     }
 
     .lightbox-modal.open {
       display: flex;
     }
 
+    .lightbox-scroll-container {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-overflow-scrolling: touch;
+      padding: 20px;
+    }
+
     .lightbox-content {
       position: relative;
-      max-width: 95vw;
-      max-height: 95vh;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .lightbox-content img {
-      max-width: 100%;
+      max-width: 90vw;
       max-height: 90vh;
       object-fit: contain;
       border-radius: 4px;
+      transition: transform 0.2s ease;
+      cursor: grab;
+    }
+
+    .lightbox-content img:active {
+      cursor: grabbing;
     }
 
     .lightbox-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
+      position: fixed;
+      top: 20px;
+      right: 20px;
       font-size: 32px;
       color: #fff;
       cursor: pointer;
-      background: none;
-      border: none;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid var(--border-strong);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1010;
+    }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border-strong);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 4px;
+      color: #fff;
+      z-index: 1010;
+      letter-spacing: 0.05em;
     }
 
     /* INFO & CONTACT PAGES */
@@ -893,6 +935,8 @@
 
       <nav class="nav-links" id="desktopNav">
         <button data-page="home" class="active" data-i18n="nav_home"></button>
+        <button data-page="women" data-i18n="nav_women"></button>
+        <button data-page="men" data-i18n="nav_men"></button>
         <button data-page="sneakers" data-i18n="nav_sneakers"></button>
         <button data-page="apparel" data-i18n="nav_apparel"></button>
         <button data-page="pickup" data-i18n="nav_pickup"></button>
@@ -912,6 +956,8 @@
 
     <div class="mobile-nav" id="mobileNav">
       <button data-page="home" class="active" data-i18n="nav_home"></button>
+      <button data-page="women" data-i18n="nav_women"></button>
+      <button data-page="men" data-i18n="nav_men"></button>
       <button data-page="sneakers" data-i18n="nav_sneakers"></button>
       <button data-page="apparel" data-i18n="nav_apparel"></button>
       <button data-page="pickup" data-i18n="nav_pickup"></button>
@@ -946,6 +992,38 @@
         </div>
       </div>
       <div class="grid" id="gridHome"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: WOMEN -->
+  <div id="page-women" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_women_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_women"></h1>
+        </div>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchWomen" />
+        </div>
+      </div>
+      <div class="grid" id="gridWomen"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: MEN -->
+  <div id="page-men" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_men_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_men"></h1>
+        </div>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchMen" />
+        </div>
+      </div>
+      <div class="grid" id="gridMen"></div>
     </div>
   </div>
 
@@ -1076,12 +1154,15 @@
     </div>
   </div>
 
-  <!-- FULLSCREEN LIGHTBOX MODAL -->
-  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-      <img id="lightboxImg" src="" alt="Zoomed view">
+  <!-- FULLSCREEN ZOOMABLE LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <div class="lightbox-scroll-container" onclick="closeLightbox()">
+      <div class="lightbox-content" onclick="event.stopPropagation()">
+        <img id="lightboxImg" src="" alt="Zoomable view">
+      </div>
     </div>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
   </div>
 
   <footer>
@@ -1095,7 +1176,7 @@
 
   <script>
     // =========================================================================
-    // TERMÉKEK LISTÁJA
+    // TERMÉKEK LISTÁJA (category: 'women' / 'men', plusz 'sneakers' / 'apparel')
     // =========================================================================
     const INSTAGRAM_HANDLE = "candyquality.ro";
 
@@ -1105,25 +1186,27 @@
         brand: "UGG",
         name: "Lowmel SNEAKER | LOW UGG",
         category: "sneakers",
+        gender: "women", // Femei / Női
         sizes: ["EU 35", "EU 36", "EU 37", "EU 38", "EU 39", "EU 40", "EU 41", "EU 42", "EU 43", "EU 44"],
         condition_ro: "Deadstock (Nou)",
         condition_hu: "Deadstock (Új)",
         price: "400 RON",
         sold: false,
         images: [
-          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121944928438/1144032-lowmel-sneaker-low-ugg-1144032-che-974924.webp?ex=6af77ba0&is=6af62a20&hm=c8393b4104ace065fb7996a53702e89820d23b9c141146ade02c470338a89398&",
-          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120489504768/1144032-lowmel-sneaker-low-ugg-1144032-che-021498.webp?ex=6af77ba0&is=6af62a20&hm=3f3d8183c79f89188a8445651806fe6f1872f75fe7a9b5d42ecc9b88ab1d9e76&",
-          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120934105329/1144032-lowmel-sneaker-low-ugg-1144032-che-128584.webp?ex=6af77ba0&is=6af62a20&hm=62691a9d81e772fc6e1fe341d156a93e44056edb92a7c15ada7a1713dca3d4e9&",
-          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121404133516/1144032-lowmel-sneaker-low-ugg-1144032-che-480851.webp?ex=6af77ba0&is=6af62a20&hm=8fbdb1eff8f8b78d63dc689f30c83fecf7430c77819503dc2cff01e5e5dd9342&"
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121944928438/1144032-lowmel-sneaker-low-ugg-1144032-che-974924.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120489504768/1144032-lowmel-sneaker-low-ugg-1144032-che-021498.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120934105329/1144032-lowmel-sneaker-low-ugg-1144032-che-128584.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121404133516/1144032-lowmel-sneaker-low-ugg-1144032-che-480851.webp"
         ],
-        desc_ro: "Predare personală în Reghin, Mureș, comandă direct prin Instagram DM.",
-        desc_hu: "Személyes átvétel Szászrégenben (Reghin, Mureș), rendelés Insta DM-ben.",
+        desc_ro: "Cutie originală. Predare personală în Reghin, Mureș sau comandă direct prin Instagram DM.",
+        desc_hu: "Eredeti dobozában. Személyes átvétel Szászrégenben (Reghin, Mureș) vagy rendelés Insta DM-ben.",
       },
       {
         id: 2,
         brand: "Nike",
         name: "Nike Dunk Low 'Panda' Black/White",
         category: "sneakers",
+        gender: "men", // Bărbați / Férfi
         sizes: ["EU 40", "EU 41", "EU 42", "EU 43"],
         condition_ro: "Deadstock (Nou)",
         condition_hu: "Deadstock (Új)",
@@ -1133,14 +1216,15 @@
           "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
           "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80"
         ],
-        desc_ro: "Predare personală în Reghin, Mureș, comandă direct prin Instagram DM.",
-        desc_hu: "Személyes átvétel Szászrégenben (Reghin, Mureș), rendelés Insta DM-ben.",
+        desc_ro: "Model clasic alb-negru, nou în cutie. Disponibil pentru predare în Reghin.",
+        desc_hu: "Klasszikus fekete-fehér, új dobozában. Elérhető régeni személyes átvétellel is.",
       },
       {
         id: 3,
         brand: "Stüssy",
         name: "Stüssy Basic Logo Heavyweight Hoodie",
         category: "apparel",
+        gender: "men",
         sizes: ["S", "M", "L", "XL"],
         condition_ro: "Nou cu etichetă",
         condition_hu: "Új, címkés",
@@ -1149,14 +1233,15 @@
         images: [
           "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
         ],
-        desc_ro: "Predare personală în Reghin, Mureș, comandă direct prin Instagram DM.",
-        desc_hu: "Személyes átvétel Szászrégenben (Reghin, Mureș), rendelés Insta DM-ben.",
+        desc_ro: "Bumbac gros, croială boxy. Scrie-ne pe Instagram pentru detalii.",
+        desc_hu: "Vastag pamut anyag, boxy szabás. Írj ránk Instagramon a részletekért.",
       },
       {
         id: 4,
         brand: "Adidas",
         name: "Adidas Campus 00s 'Core Black'",
         category: "sneakers",
+        gender: "men",
         sizes: ["EU 38", "EU 41", "EU 42"],
         condition_ro: "Deadstock (Nou)",
         condition_hu: "Deadstock (Új)",
@@ -1165,14 +1250,15 @@
         images: [
           "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
         ],
-        desc_ro: "Predare personală în Reghin, Mureș, comandă direct prin Instagram DM.",
-        desc_hu: "Személyes átvétel Szászrégenben (Reghin, Mureș), rendelés Insta DM-ben.",
+        desc_ro: "Cutie originală și șireturi extra. Predare în Mureș / Reghin.",
+        desc_hu: "Eredeti doboz és extra fűzők. Átvétel Szászrégenben vagy Insta DM.",
       },
       {
         id: 5,
         brand: "Trapstar",
         name: "Trapstar Irongate T-Shirt Black",
         category: "apparel",
+        gender: "men",
         sizes: ["M"],
         condition_ro: "9.5/10 (Impecabil)",
         condition_hu: "9.5/10 (Kifogástalan)",
@@ -1193,6 +1279,8 @@
       ro: {
         ticker: "📍 Predare personală: <span>România, Mureș, Reghin</span> &bull; Vinted indisponibil momentan &bull; Comandă pe Insta: <span>@candyquality.ro</span>",
         nav_home: "Acasă",
+        nav_women: "Femei",
+        nav_men: "Bărbați",
         nav_sneakers: "Adidași",
         nav_apparel: "Haine",
         nav_pickup: "Predare & Livrare",
@@ -1204,6 +1292,8 @@
         btn_view_sneakers: "Vezi Adidașii",
         btn_pickup_info: "Detalii Predare",
         all_stock_title: "Stoc Complet",
+        cat_women_sub: "WOMEN'S COLLECTION",
+        cat_men_sub: "MEN'S COLLECTION",
         cat_sneakers_sub: "FOOTWEAR CATALOG",
         cat_apparel_sub: "STREETWEAR APPAREL",
         search_placeholder: "Caută model, brand, mărime...",
@@ -1217,7 +1307,7 @@
         btn_dm_order: "Comandă pe Instagram DM",
         btn_back: "Înapoi la produse",
         photos_label: "poze",
-        zoom_hint: "🔍 Click pentru zoom",
+        zoom_hint: "🔍 Click pentru zoom (sau zoom pe mobil)",
         copied_msg: "Mesajul cu mărimea selectată a fost copiat! Dă Paste în Instagram DM.",
         no_results: "Nu există produse care să corespundă căutării.",
         pickup_box1_title: "Predare în Reghin (Mureș)",
@@ -1236,6 +1326,8 @@
       hu: {
         ticker: "📍 Személyes átvétel: <span>Románia, Mureș, Reghin (Szászrégen)</span> &bull; Vinted jelenleg nem elérhető &bull; Rendelés Insta: <span>@candyquality.ro</span>",
         nav_home: "Kezdőlap",
+        nav_women: "Női",
+        nav_men: "Férfi",
         nav_sneakers: "Cipők",
         nav_apparel: "Ruhák",
         nav_pickup: "Átvétel & Infó",
@@ -1247,6 +1339,8 @@
         btn_view_sneakers: "Cipők megtekintése",
         btn_pickup_info: "Átvételi részletek",
         all_stock_title: "Teljes Készlet",
+        cat_women_sub: "NŐI KOLLEKCIÓ",
+        cat_men_sub: "FÉRFI KOLLEKCIÓ",
         cat_sneakers_sub: "FOOTWEAR CATALOG",
         cat_apparel_sub: "STREETWEAR APPAREL",
         search_placeholder: "Keresés modellre, márkára, méretre...",
@@ -1260,7 +1354,7 @@
         btn_dm_order: "Rendelés Instagram DM-ben",
         btn_back: "Vissza a termékekhez",
         photos_label: "kép",
-        zoom_hint: "🔍 Kattints a nagyításhoz",
+        zoom_hint: "🔍 Kattints a nagyításhoz (mobilón két ujjal is nagyítható)",
         copied_msg: "A kiválasztott méret és termék szövege kimásolva! Illeszd be Insta DM-ben.",
         no_results: "Nincs a keresésnek megfelelő darab a készletben.",
         pickup_box1_title: "Személyes átvétel Reghinben",
@@ -1321,8 +1415,7 @@
       if (page === "product" && productId) {
         activeProductId = productId;
         activeImageIndex = 0;
-        const item = PRODUCTS.find(p => p.id === productId);
-        selectedSize = ""; // Alapból nincs kiválasztva méret, amíg a vásárló rá nem kattint
+        selectedSize = "";
         window.location.hash = `product-${productId}`;
         renderProductPage(productId);
       } else {
@@ -1416,34 +1509,32 @@
     }
 
     function renderAllGrids() {
+      // Home
       const qHome = document.getElementById("searchHome").value.toLowerCase().trim();
-      const homeItems = PRODUCTS.filter(p =>
-        p.name.toLowerCase().includes(qHome) ||
-        p.brand.toLowerCase().includes(qHome) ||
-        (p.sizes || []).some(s => s.toLowerCase().includes(qHome))
-      );
-      renderGrid("gridHome", homeItems);
+      renderGrid("gridHome", PRODUCTS.filter(p => p.name.toLowerCase().includes(qHome) || p.brand.toLowerCase().includes(qHome)));
 
+      // Women
+      const qWomen = document.getElementById("searchWomen").value.toLowerCase().trim();
+      renderGrid("gridWomen", PRODUCTS.filter(p => p.gender === "women" && (p.name.toLowerCase().includes(qWomen) || p.brand.toLowerCase().includes(qWomen))));
+
+      // Men
+      const qMen = document.getElementById("searchMen").value.toLowerCase().trim();
+      renderGrid("gridMen", PRODUCTS.filter(p => p.gender === "men" && (p.name.toLowerCase().includes(qMen) || p.brand.toLowerCase().includes(qMen))));
+
+      // Sneakers
       const qSneak = document.getElementById("searchSneakers").value.toLowerCase().trim();
       const sizeSneak = document.getElementById("sizeFilterSneakers").value;
-      const sneakItems = PRODUCTS.filter(p =>
-        p.category === "sneakers" &&
-        (sizeSneak === "all" || (p.sizes || []).some(s => s.includes(sizeSneak))) &&
-        (p.name.toLowerCase().includes(qSneak) || p.brand.toLowerCase().includes(qSneak))
-      );
-      renderGrid("gridSneakers", sneakItems);
+      renderGrid("gridSneakers", PRODUCTS.filter(p => p.category === "sneakers" && (sizeSneak === "all" || (p.sizes || []).some(s => s.includes(sizeSneak))) && (p.name.toLowerCase().includes(qSneak) || p.brand.toLowerCase().includes(qSneak))));
 
+      // Apparel
       const qApp = document.getElementById("searchApparel").value.toLowerCase().trim();
       const sizeApp = document.getElementById("sizeFilterApparel").value;
-      const appItems = PRODUCTS.filter(p =>
-        p.category === "apparel" &&
-        (sizeApp === "all" || (p.sizes || []).includes(sizeApp)) &&
-        (p.name.toLowerCase().includes(qApp) || p.brand.toLowerCase().includes(qApp))
-      );
-      renderGrid("gridApparel", appItems);
+      renderGrid("gridApparel", PRODUCTS.filter(p => p.category === "apparel" && (sizeApp === "all" || (p.sizes || []).includes(sizeApp)) && (p.name.toLowerCase().includes(qApp) || p.brand.toLowerCase().includes(qApp))));
     }
 
     document.getElementById("searchHome").addEventListener("input", renderAllGrids);
+    document.getElementById("searchWomen").addEventListener("input", renderAllGrids);
+    document.getElementById("searchMen").addEventListener("input", renderAllGrids);
     document.getElementById("searchSneakers").addEventListener("input", renderAllGrids);
     document.getElementById("sizeFilterSneakers").addEventListener("change", renderAllGrids);
     document.getElementById("searchApparel").addEventListener("input", renderAllGrids);
@@ -1549,7 +1640,11 @@
     }
 
     function openLightbox(imgSrc) {
+      const item = PRODUCTS.find(p => p.id === activeProductId);
+      const totalImages = item && item.images ? item.images.length : 1;
+      
       document.getElementById("lightboxImg").src = imgSrc;
+      document.getElementById("lightboxCounter").textContent = `${activeImageIndex + 1} / ${totalImages}`;
       document.getElementById("lightboxModal").classList.add("open");
     }
 
