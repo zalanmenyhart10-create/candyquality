@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CANDY QUALITY — Verified Streetwear & Sneakers | Reghin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #101010;
+      --surface-hover: #181818;
+      --border: #222222;
+      --border-strong: #3a3a3a;
+      --text: #ffffff;
+      --muted: #888888;
+      --accent: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    /* TOP ANNOUNCEMENT BAR */
+    .ticker {
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      padding: 9px 16px;
+      font-weight: 500;
+    }
+
+    .ticker span {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(5, 5, 5, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links button {
+      padding: 4px 0;
+      position: relative;
+      transition: color 0.15s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active {
+      color: var(--text);
+    }
+
+    .nav-links button.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      background: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+
+    .lang-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .insta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: all 0.15s ease;
+    }
+
+    .insta-pill:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* MOBILE NAV */
+    .mobile-nav {
+      display: none;
+      overflow-x: auto;
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      gap: 16px;
+      background: #090909;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-nav button {
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-nav button.active {
+      color: var(--text);
+    }
+
+    /* PAGES */
+    .page-view {
+      display: none;
+      flex-grow: 1;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pickup-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-strong);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-main:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text);
+      background: var(--surface);
+    }
+
+    /* CONTAINER & GRIDS */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .controls-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-input, .size-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 14px;
+      font-size: 13px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .search-input:focus, .size-select:focus {
+      border-color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #141414;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .badge-cond {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(8, 8, 8, 0.88);
+      border: 1px solid var(--border-strong);
+      padding: 4px 9px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    .badge-photos {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(8, 8, 8, 0.85);
+      border: 1px solid var(--border-strong);
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 2px;
+      color: var(--text);
+    }
+
+    .badge-sold {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 8, 8, 0.78);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .card-brand {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      cursor: pointer;
+    }
+
+    .card-title:hover {
+      text-decoration: underline;
+    }
+
+    .card-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-sizes-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .mini-size-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: #181818;
+      border: 1px solid var(--border-strong);
+      border-radius: 2px;
+      color: var(--text);
+    }
+
+    .card-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-view {
+      display: block;
+      width: 100%;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 10px;
+      text-align: center;
+      border-radius: 3px;
+      transition: opacity 0.15s;
+    }
+
+    .btn-view:hover {
+      opacity: 0.9;
+    }
+
+    /* DEDICATED PRODUCT DETAIL PAGE */
+    .back-bar {
+      margin-bottom: 28px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      transition: all 0.15s;
+    }
+
+    .btn-back:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
+    .pdp-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .pdp-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pdp-main-img-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .pdp-main-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid var(--border-strong);
+      padding: 5px 10px;
+      font-size: 11px;
+      border-radius: 4px;
+      color: #fff;
+      pointer-events: none;
+      letter-spacing: 0.05em;
+    }
+
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      background: rgba(5, 5, 5, 0.8);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.15s;
+      z-index: 5;
+    }
+
+    .gallery-nav-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .gallery-prev { left: 12px; }
+    .gallery-next { right: 12px; }
+
+    .pdp-thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+      gap: 10px;
+    }
+
+    .pdp-thumb {
+      aspect-ratio: 1 / 1;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: all 0.15s;
+      background: var(--surface);
+    }
+
+    .pdp-thumb.active,
+    .pdp-thumb:hover {
+      opacity: 1;
+      border-color: var(--text);
+    }
+
+    .pdp-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pdp-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .pdp-brand {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .pdp-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .pdp-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    .pdp-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .pdp-sizes-section label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .pdp-size-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .size-pill-btn {
+      padding: 10px 16px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .size-pill-btn:hover {
+      border-color: var(--text);
+    }
+
+    .size-pill-btn.selected {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .pdp-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .copy-toast {
+      font-size: 12px;
+      color: #a3e635;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* FULLSCREEN ZOOMABLE LIGHTBOX */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      touch-action: none;
+    }
+
+    .lightbox-modal.open {
+      display: flex;
+    }
+
+    .lightbox-scroll-container {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-overflow-scrolling: touch;
+      padding: 20px;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+      cursor: grab;
+    }
+
+    .lightbox-content img:active {
+      cursor: grabbing;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid var(--border-strong);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1010;
+    }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border-strong);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 4px;
+      color: #fff;
+      z-index: 1010;
+      letter-spacing: 0.05em;
+    }
+
+    /* INFO & CONTACT PAGES */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .info-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 4px;
+    }
+
+    .info-box span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    .info-box h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      background: #080808;
+    }
+
+    .footer-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+      .hero { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .pdp-layout { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .nav-links { display: none; }
+      .mobile-nav { display: flex; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .pdp-info { padding: 24px; }
+    }
+
+    /* ===== ÚJ DIZÁJN ===== */
+    body{background:radial-gradient(1100px 600px at 85% -10%,rgba(130,90,255,.16),transparent 60%),radial-gradient(900px 500px at -10% 15%,rgba(255,80,160,.11),transparent 60%),var(--bg);background-attachment:fixed}
+    .ticker{background:linear-gradient(90deg,#1a1033,#2b0f26,#1a1033);color:#cfc6ee}
+    .hero h1{background:linear-gradient(90deg,#fff,#b9a6ff 60%,#ff8fc7);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .card{border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:transform .25s,box-shadow .25s,border-color .25s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(140,100,255,.2);border-color:#4a3f7a}
+    .card-img-wrap img{transition:transform .5s}
+    .btn-main,.btn-view,.btn-outline,.insta-pill,.pickup-badge{border-radius:999px}
+    .size-pill-btn{border-radius:10px}
+    .pdp-main-img-wrap,.pdp-thumb{border-radius:16px;overflow:hidden}
+    .nav-links button.active::after{background:linear-gradient(90deg,#b9a6ff,#ff8fc7)}
+    .card-colors{display:flex;gap:6px;margin:8px 0 2px;align-items:center}
+    .cdot{width:14px;height:14px;border-radius:50%;background:var(--c);border:1px solid #ffffff55;display:inline-block}
+    .swatch-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .swatch{width:36px;height:36px;border-radius:50%;background:var(--c);border:2px solid #ffffff33;outline:2px solid transparent;outline-offset:3px;transition:all .15s}
+    .swatch:hover{transform:scale(1.1)}
+    .swatch.selected{outline-color:#b9a6ff;border-color:#fff}
+    .adm{max-width:760px;margin:0 auto;padding:40px 24px;display:grid;gap:12px}
+    .adm label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .adm input,.adm select,.adm textarea{width:100%;background:var(--surface);border:1px solid var(--border-strong);color:var(--text);border-radius:10px;padding:11px 13px;font:inherit;font-size:14px}
+    .adm textarea{min-height:90px}
+    .adm .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .adm .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .adm pre{background:#0b0b0b;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;overflow:auto;max-height:260px;white-space:pre-wrap}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+    .chip{padding:9px 18px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface);font-size:13px;font-weight:600;transition:all .15s}
+    .chip:hover{border-color:#b9a6ff}
+    .chip.active{background:linear-gradient(90deg,#b9a6ff,#ff8fc7);color:#0a0a0a;border-color:transparent}
+    .lb{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.96);display:none}
+    .lb.open{display:block}
+    .lb-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;cursor:zoom-in}
+    .lb-stage img{max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none;transform-origin:center;will-change:transform}
+    .lb-btn{position:absolute;z-index:2;width:48px;height:48px;border-radius:50%;background:rgba(30,30,30,.75);border:1px solid #ffffff33;color:#fff;font-size:30px;line-height:1;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+    .lb-btn:hover{background:#fff;color:#000}
+    .lb-close{top:max(16px,env(safe-area-inset-top));right:16px}
+    .lb-prev,.lb-next{top:50%;margin-top:-24px}
+    .lb-prev{left:14px}.lb-next{right:14px}
+    .lb-counter{position:absolute;z-index:2;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);font-size:13px;background:rgba(30,30,30,.75);padding:6px 14px;border-radius:999px;color:#fff}
+  </style>
+</head>
+<body>
+
+  <div class="ticker" id="tickerText"></div>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('home')">
+        <img src="logo.png" alt="Candy Quality" class="brand-logo" onerror="this.style.display='none'; document.getElementById('fallbackBrand').style.display='block';">
+        <span id="fallbackBrand" style="display:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px;">CANDY QUALITY</span>
+      </div>
+
+      <nav class="nav-links" id="desktopNav">
+        <button data-page="home" class="active" data-i18n="nav_home"></button>
+        <button data-page="women" data-i18n="nav_women"></button>
+        <button data-page="men" data-i18n="nav_men"></button>
+        <button data-page="pickup" data-i18n="nav_pickup"></button>
+        <button data-page="contact" data-i18n="nav_contact"></button>
+      </nav>
+
+      <div class="nav-right">
+        <div class="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn active" id="btnRo" onclick="setLanguage('ro')">RO</button>
+          <button class="lang-btn" id="btnHu" onclick="setLanguage('hu')">HU</button>
+        </div>
+        <a href="https://instagram.com/candyquality.ro" target="_blank" rel="noopener" class="insta-pill">
+          @candyquality.ro &nearr;
+        </a>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <button data-page="home" class="active" data-i18n="nav_home"></button>
+      <button data-page="women" data-i18n="nav_women"></button>
+      <button data-page="men" data-i18n="nav_men"></button>
+      <button data-page="pickup" data-i18n="nav_pickup"></button>
+      <button data-page="contact" data-i18n="nav_contact"></button>
+    </div>
+  </header>
+
+  <!-- PAGE 1: HOME -->
+  <div id="page-home" class="page-view active">
+    <section class="hero">
+      <div>
+        <span class="hero-tag" data-i18n="hero_tag"></span>
+        <h1 data-i18n="hero_title"></h1>
+        <div class="pickup-badge" style="margin-top:20px;">
+          📍 <span data-i18n="pickup_badge_text">România, Mureș, Reghin</span>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <p data-i18n="hero_desc"></p>
+        <div class="hero-cta-row">
+          <button class="btn-main" onclick="navigateTo('sneakers')" data-i18n="btn_view_sneakers"></button>
+          <button class="btn-outline" onclick="navigateTo('pickup')" data-i18n="btn_pickup_info"></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" data-i18n="all_stock_title"></h2>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchHome" />
+        </div>
+      </div>
+      <div class="grid" id="gridHome"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: WOMEN -->
+  <div id="page-women" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_women_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_women"></h1>
+        </div>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchWomen" />
+        </div>
+      </div>
+      <div class="grid" id="gridWomen"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: MEN -->
+  <div id="page-men" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_men_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_men"></h1>
+        </div>
+        <div class="controls-right">
+          <input type="text" class="search-input" id="searchMen" />
+        </div>
+      </div>
+      <div class="grid" id="gridMen"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: SNEAKERS -->
+  <div id="page-sneakers" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_sneakers_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_sneakers"></h1>
+        </div>
+        <div class="controls-right">
+          <select class="size-select" id="sizeFilterSneakers">
+            <option value="all" data-i18n="all_sizes"></option>
+            <option value="37">EU 37</option>
+            <option value="38">EU 38</option>
+            <option value="39">EU 39</option>
+            <option value="40">EU 40</option>
+            <option value="41">EU 41</option>
+            <option value="42">EU 42</option>
+            <option value="43">EU 43</option>
+            <option value="44">EU 44</option>
+          </select>
+          <input type="text" class="search-input" id="searchSneakers" />
+        </div>
+      </div>
+      <div class="grid" id="gridSneakers"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: APPAREL -->
+  <div id="page-apparel" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;" data-i18n="cat_apparel_sub"></span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_apparel"></h1>
+        </div>
+        <div class="controls-right">
+          <select class="size-select" id="sizeFilterApparel">
+            <option value="all" data-i18n="all_sizes"></option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+          <input type="text" class="search-input" id="searchApparel" />
+        </div>
+      </div>
+      <div class="grid" id="gridApparel"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: PICKUP & VINTED NOTICE -->
+  <div id="page-pickup" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;">LIVRARE &amp; PREDARE</span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_pickup"></h1>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <span>01 / PREDARE LOCALĂ</span>
+          <h3 data-i18n="pickup_box1_title"></h3>
+          <p data-i18n="pickup_box1_desc"></p>
+        </div>
+        <div class="info-box">
+          <span>02 / VINTED STATUS</span>
+          <h3 data-i18n="pickup_box2_title"></h3>
+          <p data-i18n="pickup_box2_desc"></p>
+        </div>
+        <div class="info-box">
+          <span>03 / COMANDĂ INSTAGRAM</span>
+          <h3 data-i18n="pickup_box3_title"></h3>
+          <p data-i18n="pickup_box3_desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: CONTACT -->
+  <div id="page-contact" class="page-view">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="hero-tag" style="margin-bottom:4px;">GET IN TOUCH</span>
+          <h1 class="section-title" style="font-size:30px;" data-i18n="nav_contact"></h1>
+        </div>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-card">
+          <div>
+            <span class="hero-tag">INSTAGRAM DM DIRECT</span>
+            <h3 style="font-size:22px; margin-bottom:12px;" data-i18n="contact_ig_heading"></h3>
+            <p style="font-size:14px; color:var(--muted); line-height:1.6;" data-i18n="contact_ig_text"></p>
+          </div>
+          <a href="https://instagram.com/candyquality.ro" target="_blank" rel="noopener" class="btn-main" style="text-align:center;" data-i18n="contact_ig_button"></a>
+        </div>
+
+        <div class="contact-card">
+          <div>
+            <span class="hero-tag">LOCAȚIE / LOCALIZATION</span>
+            <h3 style="font-size:22px; margin-bottom:12px;" data-i18n="contact_loc_heading"></h3>
+            <p style="font-size:14px; color:var(--muted); line-height:1.6;" data-i18n="contact_loc_text"></p>
+          </div>
+          <div style="font-size:13px; font-weight:600; color:var(--text);">
+            📍 Reghin, Jud. Mureș, România
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 6: DEDICATED PRODUCT PAGE -->
+  <div id="page-product" class="page-view">
+    <div class="container">
+      <div class="back-bar">
+        <button class="btn-back" onclick="goBackFromProduct()">
+          &larr; <span data-i18n="btn_back"></span>
+        </button>
+      </div>
+
+      <div class="pdp-layout" id="pdpContent"></div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN ZOOMABLE LIGHTBOX MODAL -->
+  <div class="lb" id="lightboxModal">
+    <div class="lb-stage" id="lbStage"><img id="lightboxImg" src="" alt="" draggable="false"></div>
+    <button class="lb-btn lb-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" onclick="lbNav(-1)" aria-label="Previous">&#8249;</button>
+    <button class="lb-btn lb-next" id="lbNext" onclick="lbNav(1)" aria-label="Next">&#8250;</button>
+    <div class="lb-counter" id="lightboxCounter">1 / 1</div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>&copy; 2026 CANDY QUALITY (@candyquality.ro). <span data-i18n="footer_rights"></span></div>
+      <div style="display:flex; gap:20px;">
+        <a href="https://instagram.com/candyquality.ro" target="_blank" rel="noopener">Instagram: @candyquality.ro</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // TERMÉKEK LISTÁJA (category: 'women' / 'men', plusz 'sneakers' / 'apparel')
+    // =========================================================================
+    const INSTAGRAM_HANDLE = "candyquality.ro";
+
+    const PRODUCTS = [
+      {
+        id: 1,
+        brand: "UGG",
+        name: "Lowmel SNEAKER | LOW UGG",
+        category: "sneakers",
+        gender: "women", // Femei / Női
+        sizes: ["EU 35", "EU 36", "EU 37", "EU 38", "EU 39", "EU 40", "EU 41", "EU 42", "EU 43", "EU 44"],
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "400 RON",
+        sold: false,
+        images: [
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121944928438/1144032-lowmel-sneaker-low-ugg-1144032-che-974924.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120489504768/1144032-lowmel-sneaker-low-ugg-1144032-che-021498.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545120934105329/1144032-lowmel-sneaker-low-ugg-1144032-che-128584.webp",
+          "https://cdn.discordapp.com/attachments/1564383709082165351/1570545121404133516/1144032-lowmel-sneaker-low-ugg-1144032-che-480851.webp"
+        ],
+        desc_ro: "Cutie originală. Predare personală în Reghin, Mureș sau comandă direct prin Instagram DM.",
+        desc_hu: "Eredeti dobozában. Személyes átvétel Szászrégenben (Reghin, Mureș) vagy rendelés Insta DM-ben.",
+      },
+      {
+        id: 2,
+        brand: "Nike",
+        name: "Nike Dunk Low 'Panda' Black/White",
+        category: "sneakers",
+        gender: "men", // Bărbați / Férfi
+        sizes: ["EU 40", "EU 41", "EU 42", "EU 43"],
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "580 RON",
+        sold: false,
+        images: [
+          "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?auto=format&fit=crop&w=800&q=80"
+        ],
+        desc_ro: "Model clasic alb-negru, nou în cutie. Disponibil pentru predare în Reghin.",
+        desc_hu: "Klasszikus fekete-fehér, új dobozában. Elérhető régeni személyes átvétellel is.",
+      },
+      {
+        id: 3,
+        brand: "Stüssy",
+        name: "Stüssy Basic Logo Heavyweight Hoodie",
+        category: "apparel",
+        gender: "men",
+        sizes: ["S", "M", "L", "XL"],
+        condition_ro: "Nou cu etichetă",
+        condition_hu: "Új, címkés",
+        price: "690 RON",
+        sold: false,
+        images: [
+          "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
+        ],
+        desc_ro: "Bumbac gros, croială boxy. Scrie-ne pe Instagram pentru detalii.",
+        desc_hu: "Vastag pamut anyag, boxy szabás. Írj ránk Instagramon a részletekért.",
+      },
+      {
+        id: 4,
+        brand: "Adidas",
+        name: "Adidas Campus 00s 'Core Black'",
+        category: "sneakers",
+        gender: "men",
+        sizes: ["EU 38", "EU 41", "EU 42"],
+        condition_ro: "Deadstock (Nou)",
+        condition_hu: "Deadstock (Új)",
+        price: "550 RON",
+        sold: false,
+        images: [
+          "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+        ],
+        desc_ro: "Cutie originală și șireturi extra. Predare în Mureș / Reghin.",
+        desc_hu: "Eredeti doboz és extra fűzők. Átvétel Szászrégenben vagy Insta DM.",
+      },
+      {
+        id: 5,
+        brand: "Trapstar",
+        name: "Trapstar Irongate T-Shirt Black",
+        category: "apparel",
+        gender: "men",
+        sizes: ["M"],
+        condition_ro: "9.5/10 (Impecabil)",
+        condition_hu: "9.5/10 (Kifogástalan)",
+        price: "320 RON",
+        sold: true,
+        images: [
+          "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80"
+        ],
+        desc_ro: "Produs vândut.",
+        desc_hu: "Már elkelt.",
+      }
+    ];
+
+    // =========================================================================
+    // SZÓTÁR (RO / HU)
+    // =========================================================================
+    const TRANSLATIONS = {
+      ro: {
+        ticker: "📍 Predare personală: <span>România, Mureș, Reghin</span> &bull; Vinted indisponibil momentan &bull; Comandă pe Insta: <span>@candyquality.ro</span>",
+        nav_home: "Acasă",
+        nav_women: "Femei",
+        nav_men: "Bărbați",
+        nav_sneakers: "Adidași",
+        nav_apparel: "Haine",
+        nav_pickup: "Predare & Livrare",
+        nav_contact: "Contact",
+        hero_tag: "Verified Streetwear & Sneakers • Reghin",
+        hero_title: "Piese selectate,<br>disponibile în stoc.",
+        pickup_badge_text: "Predare personală disponibilă în: România, Mureș, Reghin",
+        hero_desc: "Toate produsele sunt 100% originale. Momentan platforma Vinted nu este disponibilă, așa că toate comenzile și rezervările se fac direct prin Instagram DM.",
+        btn_view_sneakers: "Vezi Adidașii",
+        btn_pickup_info: "Detalii Predare",
+        all_stock_title: "Stoc Complet",
+        cat_women_sub: "WOMEN'S COLLECTION",
+        cat_men_sub: "MEN'S COLLECTION",
+        cat_sneakers_sub: "FOOTWEAR CATALOG",
+        cat_apparel_sub: "STREETWEAR APPAREL",
+        search_placeholder: "Caută model, brand, mărime...",
+        all_sizes: "Toate mărimile",
+        label_size: "Mărimi disponibile",
+        label_select_size: "Alege mărimea pentru a comanda",
+        label_cond: "Stare",
+        badge_sold: "VÂNDUT",
+        btn_sold: "Produs Vândut",
+        btn_view_product: "Vezi produsul",
+        btn_dm_order: "Comandă pe Instagram DM",
+        btn_back: "Înapoi la produse",
+        photos_label: "poze",
+        zoom_hint: "🔍 Click pentru zoom (sau zoom pe mobil)",
+        copied_msg: "Mesajul cu mărimea selectată a fost copiat! Dă Paste în Instagram DM.",
+        no_results: "Nu există produse care să corespundă căutării.",
+        pickup_box1_title: "Predare în Reghin (Mureș)",
+        pickup_box1_desc: "Dacă ești din zonă (România, Mureș, Reghin), ne putem întâlni personal pentru predare și verificare fizică.",
+        pickup_box2_title: "Vinted Indisponibil Momentan",
+        pickup_box2_desc: "Din motive tehnice, contul de Vinted nu este activ în această perioadă. Achizițiile se finalizează exclusiv prin Instagram.",
+        pickup_box3_title: "Comandă Rapidă prin DM",
+        pickup_box3_desc: "Trimite-ne un mesaj pe @candyquality.ro cu produsul dorit, mărimea și stabilim detaliile expedierii sau întâlnirii.",
+        contact_ig_heading: "Scrie-ne pe Instagram DM",
+        contact_ig_text: "Pentru prețuri, poze suplimentare, detalii despre mărimi sau stabilirea întâlnirii în Reghin, scrie-ne direct pe contul oficial.",
+        contact_ig_button: "Deschide @candyquality.ro",
+        contact_loc_heading: "Zona de Operare",
+        contact_loc_text: "Baza noastră principală este în județul Mureș. Asigurăm predare fizică locală și comunicare rapidă.",
+        footer_rights: "Toate drepturile rezervate."
+      },
+      hu: {
+        ticker: "📍 Személyes átvétel: <span>Románia, Mureș, Reghin (Szászrégen)</span> &bull; Vinted jelenleg nem elérhető &bull; Rendelés Insta: <span>@candyquality.ro</span>",
+        nav_home: "Kezdőlap",
+        nav_women: "Női",
+        nav_men: "Férfi",
+        nav_sneakers: "Cipők",
+        nav_apparel: "Ruhák",
+        nav_pickup: "Átvétel & Infó",
+        nav_contact: "Kapcsolat",
+        hero_tag: "Verified Streetwear & Sneakers • Reghin",
+        hero_title: "Válogatott darabok,<br>azonnal készletről.",
+        pickup_badge_text: "Személyes átvétel helye: Románia, Mureș, Reghin (Szászrégen)",
+        hero_desc: "Minden feltöltött termék 100% eredeti. A Vinted jelenleg nem elérhető, ezért minden rendelést, egyeztetést és foglalást közvetlenül Instagramon intézünk.",
+        btn_view_sneakers: "Cipők megtekintése",
+        btn_pickup_info: "Átvételi részletek",
+        all_stock_title: "Teljes Készlet",
+        cat_women_sub: "NŐI KOLLEKCIÓ",
+        cat_men_sub: "FÉRFI KOLLEKCIÓ",
+        cat_sneakers_sub: "FOOTWEAR CATALOG",
+        cat_apparel_sub: "STREETWEAR APPAREL",
+        search_placeholder: "Keresés modellre, márkára, méretre...",
+        all_sizes: "Minden méret",
+        label_size: "Elérhető méretek",
+        label_select_size: "Válassz méretet a rendeléshez",
+        label_cond: "Állapot",
+        badge_sold: "ELKELT",
+        btn_sold: "Már elkelt",
+        btn_view_product: "Termék megtekintése",
+        btn_dm_order: "Rendelés Instagram DM-ben",
+        btn_back: "Vissza a termékekhez",
+        photos_label: "kép",
+        zoom_hint: "🔍 Kattints a nagyításhoz (mobilón két ujjal is nagyítható)",
+        copied_msg: "A kiválasztott méret és termék szövege kimásolva! Illeszd be Insta DM-ben.",
+        no_results: "Nincs a keresésnek megfelelő darab a készletben.",
+        pickup_box1_title: "Személyes átvétel Reghinben",
+        pickup_box1_desc: "Ha a közelben vagy (Románia, Mureș, Reghin / Szászrégen), személyesen is át tudod venni a cipőket és ruhákat.",
+        pickup_box2_title: "A Vinted jelenleg nem elérhető",
+        pickup_box2_desc: "Technikai okok miatt a Vinted oldalon keresztül most nem tudsz vásárolni. Az adásvételt biztonságosan Instagramon bonyolítjuk.",
+        pickup_box3_title: "Rendelés menete Insta DM-ben",
+        pickup_box3_desc: "Kattints az Instagram gombra, írd meg nekem a modellt és a méretet, én pedig válaszolok minden részlettel.",
+        contact_ig_heading: "Instagram DM ügyfélszolgálat",
+        contact_ig_text: "Méretkérdésekkel, extra képekért vagy a régeni személyes átvétel időpontjáért írj bátran a hivatalos oldalunkra.",
+        contact_ig_button: "@candyquality.ro megnyitása",
+        contact_loc_heading: "Fő helyszín",
+        contact_loc_text: "Fő bázisunk Romániában, Maros megyében, Szászrégenben (Reghin) található.",
+        footer_rights: "Minden jog fenntartva."
+      }
+    };
+
+    // =========================================================================
+    // VEZÉRLÉS ÉS NAVIGÁCIÓ
+    // =========================================================================
+    let currentLang = "ro";
+    let currentPage = "home";
+    let previousPage = "home";
+    let activeProductId = null;
+    let activeImageIndex = 0;
+    let selectedSize = "";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("btnRo").classList.toggle("active", lang === "ro");
+      document.getElementById("btnHu").classList.toggle("active", lang === "hu");
+
+      const t = TRANSLATIONS[lang];
+      document.getElementById("tickerText").innerHTML = t.ticker;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.innerHTML = t[key];
+      });
+
+      document.querySelectorAll(".search-input").forEach(inp => {
+        inp.placeholder = t.search_placeholder;
+      });
+
+      renderAllGrids();
+      if (currentPage === "product" && activeProductId) {
+        renderProductPage(activeProductId);
+      }
+    }
+
+    function navigateTo(page, productId = null) {
+      if (page !== "product") {
+        previousPage = page;
+      }
+      currentPage = page;
+
+      if (page === "product" && productId) {
+        activeProductId = productId;
+        activeImageIndex = 0;
+        selectedSize = "";
+        selectedColor = "";
+        window.location.hash = `product-${productId}`;
+        renderProductPage(productId);
+      } else {
+        window.location.hash = page;
+      }
+
+      document.querySelectorAll(".page-view").forEach(sec => {
+        sec.classList.toggle("active", sec.id === `page-${page}`);
+      });
+
+      document.querySelectorAll("[data-page]").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-page") === (page === "product" ? previousPage : page));
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goBackFromProduct() {
+      navigateTo(previousPage || "home");
+    }
+
+    document.querySelectorAll("[data-page]").forEach(btn => {
+      btn.addEventListener("click", () => navigateTo(btn.getAttribute("data-page")));
+    });
+
+    function handleHashRouting() {
+      const hash = window.location.hash.replace("#", "");
+      if (hash.startsWith("product-")) {
+        const id = parseInt(hash.replace("product-", ""), 10);
+        if (!isNaN(id) && PRODUCTS.some(p => p.id === id)) {
+          navigateTo("product", id);
+          return;
+        }
+      }
+      if (hash && document.getElementById(`page-${hash}`) && hash !== "product") {
+        navigateTo(hash);
+      }
+    }
+
+    window.addEventListener("hashchange", handleHashRouting);
+
+    // =========================================================================
+    // KÁRTYÁK RENDERELÉSE
+    // =========================================================================
+    function createCardHTML(item) {
+      const t = TRANSLATIONS[currentLang];
+      const cond = currentLang === "ro" ? item.condition_ro : item.condition_hu;
+      const mainImg = item.images && item.images.length > 0 ? item.images[0] : "";
+      const photoCount = item.images ? item.images.length : 1;
+      const sizesHTML = (item.sizes || []).map(s => `<span class="mini-size-tag">${s}</span>`).join("");
+
+      return `
+        <article class="card">
+          <div class="card-img-wrap" onclick="navigateTo('product', ${item.id})">
+            <img src="${mainImg}" alt="${item.name}" loading="lazy">
+            <span class="badge-cond">${cond}</span>
+            ${photoCount > 1 ? `<span class="badge-photos">📷 ${photoCount} ${t.photos_label}</span>` : ''}
+            ${item.sold ? `<div class="badge-sold">${t.badge_sold}</div>` : ''}
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="card-brand">${item.brand}</div>
+              <h3 class="card-title" onclick="navigateTo('product', ${item.id})">${item.name}</h3>
+            </div>
+            <div>
+              <div class="card-specs">
+                <div class="card-sizes-list">
+                  ${sizesHTML}
+                </div>
+                ${colorDots(item)}<div class="card-price-row">
+                  <span style="font-size:11px; color:var(--muted);">${t.label_size}</span>
+                  <span class="card-price">${item.price}</span>
+                </div>
+              </div>
+              <div class="card-actions" style="margin-top: 12px;">
+                <button class="btn-view" onclick="navigateTo('product', ${item.id})">${t.btn_view_product}</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderGrid(targetId, items) {
+      const container = document.getElementById(targetId);
+      if (items.length === 0) {
+        container.innerHTML = `<p style="color:var(--muted); grid-column:1/-1; padding:32px 0;">${TRANSLATIONS[currentLang].no_results}</p>`;
+        return;
+      }
+      container.innerHTML = items.map(createCardHTML).join("");
+    }
+
+    function renderAllGridsBase() {
+      // Home
+      const qHome = document.getElementById("searchHome").value.toLowerCase().trim();
+      renderGrid("gridHome", PRODUCTS.filter(p => p.name.toLowerCase().includes(qHome) || p.brand.toLowerCase().includes(qHome)));
+
+      // Women
+      const qWomen = document.getElementById("searchWomen").value.toLowerCase().trim();
+      renderGrid("gridWomen", PRODUCTS.filter(p => p.gender === "women" && (p.name.toLowerCase().includes(qWomen) || p.brand.toLowerCase().includes(qWomen))));
+
+      // Men
+      const qMen = document.getElementById("searchMen").value.toLowerCase().trim();
+      renderGrid("gridMen", PRODUCTS.filter(p => p.gender === "men" && (p.name.toLowerCase().includes(qMen) || p.brand.toLowerCase().includes(qMen))));
+
+      // Sneakers
+      const qSneak = document.getElementById("searchSneakers").value.toLowerCase().trim();
+      const sizeSneak = document.getElementById("sizeFilterSneakers").value;
+      renderGrid("gridSneakers", PRODUCTS.filter(p => p.category === "sneakers" && (sizeSneak === "all" || (p.sizes || []).some(s => s.includes(sizeSneak))) && (p.name.toLowerCase().includes(qSneak) || p.brand.toLowerCase().includes(qSneak))));
+
+      // Apparel
+      const qApp = document.getElementById("searchApparel").value.toLowerCase().trim();
+      const sizeApp = document.getElementById("sizeFilterApparel").value;
+      renderGrid("gridApparel", PRODUCTS.filter(p => p.category === "apparel" && (sizeApp === "all" || (p.sizes || []).includes(sizeApp)) && (p.name.toLowerCase().includes(qApp) || p.brand.toLowerCase().includes(qApp))));
+    }
+
+    document.getElementById("searchHome").addEventListener("input", renderAllGrids);
+    document.getElementById("searchWomen").addEventListener("input", renderAllGrids);
+    document.getElementById("searchMen").addEventListener("input", renderAllGrids);
+    document.getElementById("searchSneakers").addEventListener("input", renderAllGrids);
+    document.getElementById("sizeFilterSneakers").addEventListener("change", renderAllGrids);
+    document.getElementById("searchApparel").addEventListener("input", renderAllGrids);
+    document.getElementById("sizeFilterApparel").addEventListener("change", renderAllGrids);
+
+    // =========================================================================
+    // KÜLÖN TERMÉKOLDAL + ZOOM LIGHTBOX
+    // =========================================================================
+    function renderProductPage(id) {
+      const item = PRODUCTS.find(p => p.id === id);
+      if (!item) return;
+
+      const t = TRANSLATIONS[currentLang];
+      const cond = currentLang === "ro" ? item.condition_ro : item.condition_hu;
+      const desc = currentLang === "ro" ? item.desc_ro : item.desc_hu;
+      const _gi = galleryImages(item); const images = _gi.length ? _gi : [""];
+      const sizes = item.sizes || [];
+
+      const thumbsHTML = images.length > 1
+        ? `<div class="pdp-thumbs">
+            ${images.map((imgUrl, idx) => `
+              <div class="pdp-thumb ${idx === activeImageIndex ? 'active' : ''}" onclick="setGalleryImage(${idx})">
+                <img src="${imgUrl}" alt="${item.name} ${idx + 1}">
+              </div>
+            `).join("")}
+          </div>`
+        : "";
+
+      const navArrowsHTML = images.length > 1
+        ? `<button class="gallery-nav-btn gallery-prev" onclick="changeGalleryImage(event, -1)" aria-label="Previous">&#8249;</button>
+           <button class="gallery-nav-btn gallery-next" onclick="changeGalleryImage(event, 1)" aria-label="Next">&#8250;</button>`
+        : "";
+
+      const sizesButtonsHTML = sizes.map(sz => `
+        <button type="button" class="size-pill-btn ${selectedSize === sz ? 'selected' : ''}" onclick="selectProductSize('${sz}')">
+          ${sz}
+        </button>
+      `).join("");
+
+      document.getElementById("pdpContent").innerHTML = `
+        <div class="pdp-gallery">
+          <div class="pdp-main-img-wrap" onclick="openLightbox('${images[activeImageIndex]}')">
+            <img id="pdpMainImg" src="${images[activeImageIndex]}" alt="${item.name}">
+            <div class="zoom-hint">${t.zoom_hint}</div>
+            ${navArrowsHTML}
+            ${item.sold ? `<div class="badge-sold">${t.badge_sold}</div>` : ''}
+          </div>
+          ${thumbsHTML}
+        </div>
+
+        <div class="pdp-info">
+          <div>
+            <div class="pdp-brand">${item.brand}</div>
+            <h1 class="pdp-title">${item.name}</h1>
+            <div class="pdp-price">${item.price}</div>
+          </div>
+
+          <div class="pdp-meta-row">
+            <div><span style="color:var(--muted);">${t.label_cond}:</span> <strong>${cond}</strong></div>
+            <div><span style="color:var(--muted);">Locație:</span> <strong>Reghin, Mureș</strong></div>
+          </div>
+
+          ${colorSection(item)}<div class="pdp-sizes-section">
+            <label>${t.label_select_size}:</label>
+            <div class="pdp-size-grid">
+              ${sizesButtonsHTML}
+            </div>
+          </div>
+
+          <p class="pdp-desc">${desc}</p>
+
+          <div>
+            ${item.sold
+              ? `<button class="btn-dm" style="opacity:0.4; cursor:default; padding:14px;">${t.btn_sold}</button>`
+              : (canOrder(item) 
+                  ? `<button onclick="orderProductOnInsta(${item.id})" class="btn-main" style="width:100%; padding:14px; font-size:12px; background:var(--text); color:var(--bg);">${t.btn_dm_order}</button>
+                     <div class="copy-toast" id="copyToast" style="display:block;">✓ ${t.copied_msg}</div>`
+                  : `<button class="btn-main" style="width:100%; padding:14px; font-size:12px; opacity:0.5; cursor:not-allowed;" disabled>${t.btn_dm_order}</button>
+                     <div style="font-size:11px; color:var(--muted); margin-top:6px;">* Válassz egy méretet a rendeléshez / Alege o mărime pentru comandă</div>`
+                )
+            }
+          </div>
+        </div>
+      `;
+    }
+
+    function setGalleryImage(index) {
+      activeImageIndex = index;
+      if (activeProductId) renderProductPage(activeProductId);
+    }
+
+    function changeGalleryImage(event, delta) {
+      event.stopPropagation();
+      const item = PRODUCTS.find(p => p.id === activeProductId);
+      const _g = item ? galleryImages(item) : [];
+      if (_g.length <= 1) return;
+      activeImageIndex = (activeImageIndex + delta + _g.length) % _g.length;
+      renderProductPage(activeProductId);
+    }
+
+    function selectProductSize(size) {
+      selectedSize = size;
+      if (activeProductId) renderProductPage(activeProductId);
+    }
+
+    function openLightbox() {
+      document.getElementById("lightboxModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+      lbShow();
+    }
+    function closeLightbox() {
+      document.getElementById("lightboxModal").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    // --- Lightbox: nyilak, 2 ujjas zoom, mozgatás, dupla koppintás, wheel zoom ---
+    const LB = { s: 1, x: 0, y: 0 };
+    const lbImg = () => document.getElementById("lightboxImg");
+    const lbStage = () => document.getElementById("lbStage");
+    function lbApply() { lbImg().style.transform = `translate(${LB.x}px,${LB.y}px) scale(${LB.s})`; }
+    function lbReset() { LB.s = 1; LB.x = 0; LB.y = 0; lbApply(); }
+    function lbClamp() {
+      if (LB.s <= 1.01) { LB.s = 1; LB.x = 0; LB.y = 0; return; }
+      const r = lbStage().getBoundingClientRect();
+      const mx = (LB.s - 1) * r.width / 2, my = (LB.s - 1) * r.height / 2;
+      LB.x = Math.max(-mx, Math.min(mx, LB.x)); LB.y = Math.max(-my, Math.min(my, LB.y));
+    }
+    function lbShow() {
+      const item = PRODUCTS.find(p => p.id === activeProductId);
+      if (!item) return;
+      const g = galleryImages(item);
+      lbImg().src = g[activeImageIndex] || "";
+      document.getElementById("lightboxCounter").textContent = `${activeImageIndex + 1} / ${g.length}`;
+      document.getElementById("lbPrev").style.display = document.getElementById("lbNext").style.display = g.length > 1 ? "flex" : "none";
+      lbReset();
+    }
+    function lbNav(d) {
+      const item = PRODUCTS.find(p => p.id === activeProductId);
+      if (!item) return;
+      const n = galleryImages(item).length;
+      if (n <= 1) return;
+      activeImageIndex = (activeImageIndex + d + n) % n;
+      lbShow();
+      renderProductPage(activeProductId);
+    }
+    // zoom egy pont körül (px, py a stage közepéhez képest)
+    function lbZoomAt(newS, px, py) {
+      newS = Math.max(1, Math.min(5, newS));
+      const k = newS / LB.s;
+      LB.x = px - (px - LB.x) * k; LB.y = py - (py - LB.y) * k; LB.s = newS;
+      lbClamp(); lbApply();
+    }
+    (function () {
+      const st = lbStage(), pts = new Map();
+      let pinch = null, pan = null, down = null, lastTap = 0;
+      const rel = e => { const r = st.getBoundingClientRect(); return { x: e.clientX - r.left - r.width / 2, y: e.clientY - r.top - r.height / 2 }; };
+      const two = () => { const [a, b] = [...pts.values()]; return { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 }; };
+      st.addEventListener("pointerdown", e => {
+        st.setPointerCapture(e.pointerId);
+        pts.set(e.pointerId, rel(e));
+        if (pts.size === 2) { const t = two(); pinch = { d: t.d, s: LB.s, x: LB.x, y: LB.y, mx: t.mx, my: t.my }; pan = null; down = null; }
+        else if (pts.size === 1) { const p = rel(e); pan = { sx: p.x, sy: p.y, x: LB.x, y: LB.y }; down = { x: p.x, y: p.y, t: Date.now() }; }
+      });
+      st.addEventListener("pointermove", e => {
+        if (!pts.has(e.pointerId)) return;
+        pts.set(e.pointerId, rel(e));
+        if (pts.size === 2 && pinch) {
+          const t = two();
+          const s = Math.max(1, Math.min(5, pinch.s * t.d / pinch.d)), k = s / pinch.s;
+          LB.s = s;
+          LB.x = t.mx - (pinch.mx - pinch.x) * k;
+          LB.y = t.my - (pinch.my - pinch.y) * k;
+          lbClamp(); lbApply();
+        } else if (pts.size === 1 && pan && LB.s > 1) {
+          const p = pts.get(e.pointerId);
+          LB.x = pan.x + (p.x - pan.sx); LB.y = pan.y + (p.y - pan.sy);
+          lbClamp(); lbApply();
+        }
+      });
+      const end = e => {
+        const p = pts.get(e.pointerId);
+        pts.delete(e.pointerId);
+        if (pts.size < 2) pinch = null;
+        if (pts.size === 1) { const q = [...pts.values()][0]; pan = { sx: q.x, sy: q.y, x: LB.x, y: LB.y }; down = null; return; }
+        if (pts.size === 0 && down && p && e.type === "pointerup") {
+          const dx = p.x - down.x, dy = p.y - down.y, dt = Date.now() - down.t;
+          if (LB.s === 1 && Math.abs(dx) > 60 && Math.abs(dy) < 90) lbNav(dx < 0 ? 1 : -1);          // húzás = következő/előző kép
+          else if (Math.hypot(dx, dy) < 10 && dt < 300) {                                              // dupla koppintás = zoom
+            const now = Date.now();
+            if (now - lastTap < 320) { LB.s > 1 ? lbZoomAt(1, 0, 0) : lbZoomAt(2.5, p.x, p.y); lastTap = 0; }
+            else lastTap = now;
+          }
+        }
+        pan = null; down = null;
+      };
+      st.addEventListener("pointerup", end);
+      st.addEventListener("pointercancel", end);
+      st.addEventListener("wheel", e => { e.preventDefault(); const p = rel(e); lbZoomAt(LB.s * (e.deltaY < 0 ? 1.2 : 1 / 1.2), p.x, p.y); }, { passive: false });
+      document.addEventListener("keydown", e => {
+        if (!document.getElementById("lightboxModal").classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") lbNav(-1);
+        else if (e.key === "ArrowRight") lbNav(1);
+      });
+    })();
+
+    function orderProductOnInsta(id) {
+      const item = PRODUCTS.find(p => p.id === id);
+      if (!item || !selectedSize) return;
+
+      const msg = currentLang === "ro"
+        ? `Salut! Sunt interesat de: ${item.name} (${selectedSize}${selectedColor ? ", " + selectedColor : ""}) - ${item.price}`
+        : `Szia! Érdekelne ez a termék: ${item.name} (${selectedSize}${selectedColor ? ", " + selectedColor : ""}) - ${item.price}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).catch(() => {});
+      }
+
+      window.open(`https://ig.me/m/${INSTAGRAM_HANDLE}`, "_blank", "noopener");
+    }
+
+    // =========================================================================
+    // ÚJ: SZÍNEK, TÖBB OLDAL, TERMÉK HOZZÁADÓ (#admin)
+    // =========================================================================
+    let selectedColor = "";
+    const ph = (label, hex) => "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='600' height='750'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${hex}'/><stop offset='1' stop-color='#050505'/></linearGradient></defs><rect width='600' height='750' fill='url(#g)'/><text x='300' y='375' fill='white' fill-opacity='.8' font-family='Arial' font-size='28' text-anchor='middle'>${label}</text></svg>`);
+
+    function colorDots(item) {
+      const cs = item.colors || [];
+      return cs.length ? `<div class="card-colors">${cs.map(c => `<span class="cdot" style="--c:${c.hex}" title="${c.name}"></span>`).join("")}</div>` : "";
+    }
+    function colorSection(item) {
+      const cs = item.colors || [];
+      if (!cs.length) return "";
+      return `<div class="pdp-sizes-section"><label>${TRANSLATIONS[currentLang].label_color}: <strong>${selectedColor || "—"}</strong></label>
+        <div class="swatch-row">${cs.map((c, i) => `<button type="button" class="swatch ${selectedColor === c.name ? "selected" : ""}" style="--c:${c.hex}" title="${c.name}" onclick="selectProductColor(${i})"></button>`).join("")}</div></div>`;
+    }
+    function selectProductColor(i) {
+      const item = PRODUCTS.find(p => p.id === activeProductId);
+      const c = item.colors[i];
+      selectedColor = c.name;
+      activeImageIndex = 0;
+      renderProductPage(activeProductId);
+    }
+    function galleryImages(item) {
+      const c = (item.colors || []).find(x => x.name === selectedColor);
+      return (c && c.images && c.images.length) ? c.images : (item.images || []);
+    }
+    const phSet = (label, hex) => [1, 2, 3, 4].map(i => ph(label + " " + i, hex));
+    function canOrder(item) {
+      return selectedSize && (!(item.colors || []).length || selectedColor);
+    }
+
+    // Termék hozzáadása EGY sorból. colors: [["Név","#hex"], ...]; images: sorrendben a színekhez (1. kép = 1. szín)
+    function addProduct(o) {
+      const id = Math.max(0, ...PRODUCTS.map(p => p.id)) + 1;
+      const type = o.type || "hoodie";
+      const colors = (o.colors || []).map(c => ({ name: c[0], hex: c[1] || "#888", images: (c[2] && c[2].length) ? c[2] : phSet(o.name + " - " + c[0], c[1] || "#888") }));
+      const images = colors.length ? colors[0].images : ((o.images && o.images.length) ? o.images : [ph(o.name, "#444")]);
+      PRODUCTS.push({
+        id, brand: o.brand || "", name: o.name, type, gender: o.gender || "unisex",
+        category: type === "sneakers" ? "sneakers" : "apparel",
+        sizes: o.sizes || ["S", "M", "L", "XL"], colors, images,
+        condition_ro: o.cond_ro || "Nou", condition_hu: o.cond_hu || "Új",
+        price: o.price, sold: !!o.sold,
+        desc_ro: o.desc_ro || "Predare personală în Reghin, Mureș sau comandă direct prin Instagram DM.",
+        desc_hu: o.desc_hu || "Személyes átvétel Szászrégenben (Reghin, Mureș) vagy rendelés Insta DM-ben."
+      });
+    }
+
+    // --- meglévő termékek kiegészítése ---
+    PRODUCTS.forEach(p => { if (/hoodie/i.test(p.name)) p.type = "hoodie"; });
+    const ugg = PRODUCTS.find(p => p.id === 1);
+    ugg.colors = [{ name: "Chestnut", hex: "#8b5a3c", images: ugg.images.slice(0, 4) }, { name: "Black", hex: "#1a1a1a", images: phSet("UGG Lowmel - Black", "#1a1a1a") }, { name: "Sand", hex: "#cdb89a", images: phSet("UGG Lowmel - Sand", "#cdb89a") }];
+
+    // >>> ÚJ TERMÉK IDE (a #admin oldal legenerálja a kódot, csak másold be ide) <<<
+    addProduct({ brand: "Stüssy", name: "Stüssy Cargo Pants", type: "pants", sizes: ["S", "M", "L", "XL"], price: "520 RON", colors: [["Black", "#1a1a1a"], ["Khaki", "#6b6a4a"], ["Grey", "#777777"]] });
+    addProduct({ brand: "Stüssy", name: "Stüssy Baggy Denim", type: "pants", sizes: ["S", "M", "L", "XL"], price: "560 RON", colors: [["Washed Blue", "#3b5b8a"], ["Black", "#1a1a1a"]] });
+    addProduct({ brand: "Stüssy", name: "Stüssy 8 Ball Hoodie", type: "hoodie", price: "650 RON", colors: [["Black", "#1a1a1a"], ["Grey", "#888888"], ["Cream", "#e8dfc9"], ["Navy", "#1c2a4a"]] });
+    addProduct({ brand: "Stüssy", name: "Stüssy Zip Hoodie", type: "hoodie", price: "720 RON", colors: [["Black", "#1a1a1a"], ["Forest Green", "#2f4a37"]] });
+
+    // --- Női / Férfi oldalon kategória-választó ---
+    const pickupPage = document.getElementById("page-pickup");
+    PRODUCTS.forEach(p => { if (!p.type) p.type = p.category === "sneakers" ? "sneakers" : (/t-?shirt|tee/i.test(p.name) ? "tshirt" : "other"); });
+    TRANSLATIONS.ro.label_color = "Culoare"; TRANSLATIONS.hu.label_color = "Szín";
+    const CHIPS = [["all", "Toate", "Mind"], ["pants", "Pantaloni", "Nadrágok"], ["hoodie", "Hanorace", "Pulóverek"], ["tshirt", "Tricouri", "Pólók"], ["sneakers", "Adidași", "Cipők"]];
+    const chipState = { women: "all", men: "all" };
+    const typeMatch = (p, t) => t === "all" || (t === "ugg" ? p.brand === "UGG" : p.type === t);
+    ["women", "men"].forEach(g => {
+      const d = document.createElement("div");
+      d.className = "chips"; d.id = "chips_" + g;
+      document.getElementById("grid" + (g === "women" ? "Women" : "Men")).before(d);
+    });
+    function setChip(g, t) { chipState[g] = t; renderAllGrids(); }
+    function renderAllGrids() {
+      renderAllGridsBase();
+      ["women", "men"].forEach(g => {
+        const li = currentLang === "ro" ? 1 : 2, N = g === "women" ? "Women" : "Men";
+        document.getElementById("chips_" + g).innerHTML = CHIPS.map(c => `<button class="chip ${chipState[g] === c[0] ? "active" : ""}" onclick="setChip('${g}','${c[0]}')">${c[li]}</button>`).join("");
+        const q = document.getElementById("search" + N).value.toLowerCase().trim();
+        renderGrid("grid" + N, PRODUCTS.filter(p => (p.gender === g || p.gender === "unisex") && typeMatch(p, chipState[g]) && (p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))));
+      });
+    }
+
+    // --- TERMÉK HOZZÁADÓ OLDAL: nyisd meg a  #admin  címen ---
+    const adm = document.createElement("div");
+    adm.id = "page-admin"; adm.className = "page-view";
+    adm.innerHTML = `<div class="adm">
+      <h1 class="section-title">➕ Új termék hozzáadása</h1>
+      <p style="color:var(--muted);font-size:14px">Bármilyen másik oldalról másold ki a kép linkjét (jobb klikk a képre → „Kép címének másolása"), írd be ide, és kész a kód.</p>
+      <div class="row"><div><label>Márka</label><input id="ad_brand" value="Stüssy"></div><div><label>Név</label><input id="ad_name" placeholder="Stüssy Cargo Pants"></div></div>
+      <div class="row"><div><label>Ár</label><input id="ad_price" placeholder="520 RON"></div>
+        <div><label>Típus</label><select id="ad_type"><option value="pants">Nadrág</option><option value="hoodie">Pulcsi</option><option value="tshirt">Póló</option><option value="sneakers">Cipő</option><option value="jacket">Kabát</option></select></div></div>
+      <div class="row"><div><label>Nem</label><select id="ad_gender"><option value="unisex">Női + Férfi</option><option value="men">Csak férfi</option><option value="women">Csak női</option></select></div>
+        <div><label>Méretek (vesszővel)</label><input id="ad_sizes" value="S,M,L,XL"></div></div>
+      <label>Színek – soronként egy szín: Név:#hex | kép1 kép2 kép3 kép4 (szóközzel elválasztva)</label>
+      <textarea id="ad_colors" style="min-height:130px" placeholder="Black:#1a1a1a | https://kep1.jpg https://kep2.jpg https://kep3.jpg https://kep4.jpg&#10;Grey:#888888 | https://...">Black:#1a1a1a | 
+Grey:#888888 | </textarea>
+      <div class="btns"><button class="btn-main" id="ad_prev">👁 Előnézet az oldalon</button><button class="btn-outline" id="ad_copy">📋 Kód másolása</button></div>
+      <label>Ezt a kódot másold be a fájlba a „ÚJ TERMÉK IDE" sor alá</label><pre id="ad_code"></pre></div>`;
+    pickupPage.before(adm);
+    function adminRead() {
+      const v = id => document.getElementById("ad_" + id).value.trim();
+      return {
+        brand: v("brand"), name: v("name") || "Új termék", type: v("type"), gender: v("gender"), price: v("price") || "0 RON",
+        sizes: v("sizes").split(",").map(x => x.trim()).filter(Boolean),
+        colors: document.getElementById("ad_colors").value.split("\n").map(x => x.trim()).filter(Boolean).map(x => { const [p, q] = x.split("|"); const [n, h] = p.split(":"); return [n.trim(), (h || "#888").trim(), (q || "").split(/\s+/).filter(Boolean)]; })
+      };
+    }
+    function adminCode() { document.getElementById("ad_code").textContent = "addProduct(" + JSON.stringify(adminRead(), null, 2) + ");"; }
+    adm.addEventListener("input", adminCode); adminCode();
+    document.getElementById("ad_prev").onclick = () => { addProduct(adminRead()); renderAllGrids(); navigateTo("home"); };
+    document.getElementById("ad_copy").onclick = () => { navigator.clipboard && navigator.clipboard.writeText(document.getElementById("ad_code").textContent).catch(() => {}); };
+
+    // INDÍTÁS
+    setLanguage("ro");
+    handleHashRouting();
+  </script>
+</body>
+</html>
